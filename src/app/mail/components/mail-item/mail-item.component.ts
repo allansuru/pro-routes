@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Mail } from '../../models/mail.interface';
 
@@ -8,8 +9,7 @@ import { Mail } from '../../models/mail.interface';
   template: `
     <a 
       class="mail-item"
-      [routerLink]="['', { outlets: { pane: ['message', message.id] } }]"
-      routerLinkActive="active">
+      (click)="navigateToMessage()">
       <h3>
         {{ message.from }}
         <span>{{ message.timestamp | date:'shortTime' }}</span>
@@ -21,4 +21,10 @@ import { Mail } from '../../models/mail.interface';
 export class MailItemComponent {
   @Input()
   message: Mail;
+  constructor(private router: Router) {}
+  navigateToMessage() {
+    this.router.navigate(
+      ['', { outlets: { pane: ['message', this.message.id] } }]
+    );
+  }
 }
