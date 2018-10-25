@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Observable } from 'rxjs/Observable';
@@ -16,7 +16,14 @@ import { Mail } from '../../models/mail.interface';
     </div>
   `
 })
-export class MailViewComponent {
+export class MailViewComponent implements OnInit {
   message: Observable<Mail> = this.route.data.pluck('message');
+
   constructor(private route: ActivatedRoute) {}
+
+  ngOnInit() {
+    this.message.subscribe(m => {
+      console.log('message: ', m);
+    });
+  }
 }
