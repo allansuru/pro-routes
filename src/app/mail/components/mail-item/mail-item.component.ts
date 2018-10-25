@@ -7,7 +7,7 @@ import { Mail } from '../../models/mail.interface';
   selector: 'mail-item',
   styleUrls: ['mail-item.component.scss'],
   template: `
-    <a 
+    <a
       class="mail-item"
       (click)="navigateToMessage()">
       <h3>

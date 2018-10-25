@@ -13,4 +13,10 @@ export class MailService {
       .get(`http://localhost:3000/messages?folder=${folder}`)
       .map(response => response.json());
   }
+
+  getMessage(id: string): Observable<Mail> {
+    return this.http
+      .get(`http://localhost:3000/messages/${id}`)
+      .map(response => response.json());
+  }
 }
