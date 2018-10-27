@@ -1,3 +1,6 @@
+import { SingletonService } from './mail/singleton.service';
+import { Mail } from './mail/models/mail.interface';
+import { MailService } from './mail/mail.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
@@ -30,12 +33,25 @@ import 'rxjs/add/operator/filter';
   `
 })
 export class AppComponent implements OnInit {
-  constructor(private router: Router) {}
+
+  mails: Mail[] = [];
+
+  constructor(private router: Router, private emailsService: MailService, private singletonService: SingletonService) {}
   ngOnInit() {
     this.router.events
       .filter(event => event instanceof NavigationEnd)
       .subscribe(event => {
         console.log(event);
       });
+
+      this.getMails();
+  }
+
+  getMails() {
+    this.emailsService.getMessages()
+    .subscribe((itens: Mail[]) => {
+      this.mails = itens;
+      this.singletonService.config(this.mails);
+    });
   }
 }
