@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { SingletonService } from './mail/singleton.service';
 
 export const ROUTES: Routes = [
+  { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
   { path: '**', redirectTo: 'folder/inbox' }
 ];
 

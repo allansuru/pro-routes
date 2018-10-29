@@ -26,6 +26,11 @@ import 'rxjs/add/operator/filter';
             routerLinkActive="active">
             Trash
           </a>
+          <a
+          [routerLink]="['/dashboard']"
+          routerLinkActive="active">
+          Dashboard
+        </a>
         </nav>
         <mail-app></mail-app>
       </div>

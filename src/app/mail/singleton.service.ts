@@ -23,7 +23,6 @@ export class SingletonService {
         return true;
     }
 
-
     public getSpecificMail(id: number) {
         return this.Mail.find(x => x.id === id);
     }

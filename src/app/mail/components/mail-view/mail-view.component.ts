@@ -45,6 +45,6 @@ export class MailViewComponent implements OnInit {
   getMailById(id) {
    this.mail =  this.singletonService.getSpecificMail(id);
    console.log('Mail by ID: ', this.mail);
-   
+
   }
 }
