@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
 import { HttpModule } from '@angular/http';
 
 import { MailModule } from './mail/mail.module';
@@ -21,7 +21,7 @@ export const ROUTES: Routes = [
     BrowserModule,
     HttpModule,
     MailModule,
-    RouterModule.forRoot(ROUTES, { enableTracing: false })
+    RouterModule.forRoot(ROUTES, { preloadingStrategy: PreloadAllModules, enableTracing: false })
   ],
   providers: [
     SingletonService
