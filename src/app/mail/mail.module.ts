@@ -14,19 +14,25 @@ import { MailFolderResolve } from './containers/mail-folder/mail-folder.resolve'
 
 export const ROUTES: Routes = [
   {
-    path: 'folder/:name',
-    component: MailFolderComponent,
-    resolve: {
-      messages: MailFolderResolve
-    }
-  },
-  {
-    path: 'message/:id',
-    component: MailViewComponent,
-    outlet: 'pane',
-    resolve: {
-      message: MailViewResolve
-    }
+    path: 'mail',
+    component: MailAppComponent,
+    children: [
+      {
+        path: 'folder/:name',
+        component: MailFolderComponent,
+        resolve: {
+          messages: MailFolderResolve
+        }
+      },
+      {
+        path: 'message/:id',
+        component: MailViewComponent,
+        outlet: 'pane',
+        resolve: {
+          message: MailViewResolve
+        }
+      }
+    ]
   }
 ];
 
