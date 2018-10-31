@@ -16,9 +16,21 @@ import { TouchSequence } from 'selenium-webdriver';
       <h2>{{ (message | async).from }}</h2>
       <p>{{ (message | async).full }}</p>
     </div>
+    <div class="mail-reply">
+      <textarea
+        (change)="updateReply($event.target.value)"
+        placeholder="Type your reply..."
+        [value]="reply">
+      </textarea>
+      <button type="button" (click)="sendReply()">
+        Send
+      </button>
+    </div>
   `
 })
+
 export class MailViewComponent implements OnInit {
+  reply = '';
   message: Observable<Mail> = this.route.data.pluck('message');
 
   mails: Mail[] = [];
@@ -35,6 +47,10 @@ export class MailViewComponent implements OnInit {
 
     this.getMailsFromSingleton();
     this.getMailById(this.id);
+
+    this.route.params.subscribe(() => {
+      this.reply = '';
+    });
   }
 
   getMailsFromSingleton() {
@@ -46,5 +62,13 @@ export class MailViewComponent implements OnInit {
    this.mail =  this.singletonService.getSpecificMail(id);
    console.log('Mail by ID: ', this.mail);
 
+  }
+
+  updateReply(value: string) {
+    this.reply = value;
+  }
+
+  sendReply() {
+    console.log('Sent!', this.reply);
   }
 }
