@@ -31,6 +31,7 @@ import { TouchSequence } from 'selenium-webdriver';
 
 export class MailViewComponent implements OnInit {
   reply = '';
+  hasUnsavedChanges = false;
   message: Observable<Mail> = this.route.data.pluck('message');
 
   mails: Mail[] = [];
@@ -50,6 +51,7 @@ export class MailViewComponent implements OnInit {
 
     this.route.params.subscribe(() => {
       this.reply = '';
+      this.hasUnsavedChanges = false;
     });
   }
 
@@ -66,9 +68,11 @@ export class MailViewComponent implements OnInit {
 
   updateReply(value: string) {
     this.reply = value;
+    this.hasUnsavedChanges = true;
   }
 
   sendReply() {
     console.log('Sent!', this.reply);
+    this.hasUnsavedChanges = false;
   }
 }
